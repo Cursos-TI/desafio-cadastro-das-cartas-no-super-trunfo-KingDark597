@@ -1,22 +1,55 @@
 #include <stdio.h>
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
+#define MAX_CARTAS 32 // 8 estados * 4 cidades
+
+typedef struct {
+    int codigo;
+    char nome[50];
+    int populacao;
+    float area;
+    float pib;
+    int pontos_turisticos;
+} Cidade;
+
+void cadastrarCidades(Cidade cidades[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("\nCadastro da cidade %d:\n", i + 1);
+        
+        printf("Código: ");
+        scanf("%d", &cidades[i].codigo);
+        
+        printf("Nome: ");
+        scanf(" %[^\n]", cidades[i].nome); // Lê a string até a nova linha
+        
+        printf("População: ");
+        scanf("%d", &cidades[i].populacao);
+        
+        printf("Área (km²): ");
+        scanf("%f", &cidades[i].area);
+        
+        printf("PIB: ");
+        scanf("%f", &cidades[i].pib);
+        
+        printf("Número de pontos turísticos: ");
+        scanf("%d", &cidades[i].pontos_turisticos);
+    }
+}
 
 int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
+    Cidade cidades[MAX_CARTAS];
+    int n;
     
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
+    printf("Quantas cidades deseja cadastrar? (Máximo %d): ", MAX_CARTAS);
+    scanf("%d", &n);
     
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
-
+    if (n > MAX_CARTAS || n <= 0) {
+        printf("Número inválido de cidades!\n");
+        return 1;
+    }
+    
+    cadastrarCidades(cidades, n);
+    
+    printf("\nCadastro concluído!\n");
+    
     return 0;
 }
